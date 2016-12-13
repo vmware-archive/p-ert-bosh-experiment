@@ -29,9 +29,9 @@
 - type: replace
   path: /releases/-
   value:
-    name: console
-    version: ((console_release_version))
-    url: ((console_release_path))
+    name: push-apps-manager
+    version: ((push_apps_manager_release_version))
+    url: ((push_apps_manager_release_path))
 
 - type: replace
   path: /releases/-
