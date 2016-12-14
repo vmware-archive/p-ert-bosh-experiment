@@ -30,9 +30,11 @@
     name: "run_smoke_tests_user"
     password: ((run_smoke_tests_password))
     groups:
-      - cloud_controller.admin
+    - cloud_controller.admin
 
-variables:
-- name: run_smoke_tests_password
-  type: password
+- type: replace
+  path: /variables/-
+  value:
+    name: run_smoke_tests_password
+    type: password
 
