@@ -1,0 +1,38 @@
+- type: replace
+  path: /instance_groups/name=smoke-tests?
+  value:
+    name: smoke-tests
+    azs: [z1]
+    instances: 1
+    vm_type: t2.small
+    stemcell: default
+    networks: [private]
+    lifecycle: errand
+    jobs:
+    - name: smoke-tests
+      release: cf
+      properties:
+        smoke_tests:
+          api: "https://api.((system_domain))"
+          apps_domain: ((apps_domain))
+          user: "run_smoke_tests_user"
+          password: ((run_smoke_tests_password))
+          org: CF_SMOKE_TEST_ORG
+          space: CF_SMOKE_TEST_SPACE
+          skip_ssl_validation: true
+          use_existing_org: false
+          use_existing_space: false
+          # cf_dial_timeout_in_seconds: (( .properties.cf_dial_timeout_in_seconds.value )) TODO: This is an optional property in ERT
+
+- type: replace
+  path: /instance_groups/name=uaa?/jobs/name=uaa/properties/uaa/scim/users/-
+  value:
+    name: "run_smoke_tests_user"
+    password: ((run_smoke_tests_password))
+    groups:
+      - cloud_controller.admin
+
+variables:
+- name: run_smoke_tests_password
+  type: password
+
