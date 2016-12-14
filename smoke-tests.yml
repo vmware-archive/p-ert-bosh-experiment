@@ -1,5 +1,5 @@
 - type: replace
-  path: /instance_groups/name=smoke-tests?
+  path: /instance_groups/-
   value:
     name: smoke-tests
     azs: [z1]
