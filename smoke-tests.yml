@@ -6,7 +6,8 @@
     instances: 1
     vm_type: t2.small
     stemcell: default
-    networks: [private]
+    networks:
+    - name: private
     lifecycle: errand
     jobs:
     - name: smoke-tests
