@@ -9,6 +9,8 @@
     networks:
     - name: private
     lifecycle: errand
+    vm_extensions:
+    - cf-internet-required
     jobs:
     - name: smoke-tests
       release: cf
