@@ -1,0 +1,53 @@
+- type: replace
+  path: /instance_groups/-
+  value:
+    name: mysql_monitor
+    azs: [z1]
+    instances: 1
+    vm_type: t2.small
+    stemcell: default
+    networks:
+    - name: private
+    vm_extensions:
+    - cf-internet-required
+    jobs:
+    - name: replication-canary
+      release: mysql-monitoring
+      properties:
+        domain: ((system_domain))
+        cf_mysql:
+          external_host: "p-mysql-ert.((system_domain))"
+        cf:
+          skip_ssl_validation: true
+        mysql-monitoring:
+          recipient_email: "Fill in your desired email address" #TODO: make this configurable
+          cluster_identifier: "pcf-mysql"
+          replication-canary:
+            cluster_ips:
+            - 10.0.1.193 #TODO: linkify?
+            canary_database: monitor
+            canary_username: monitordb_user
+            canary_password: ((monitordb_password))
+            write_read_delay: 20
+            poll_frequency: 30
+            uaa_admin_client_username: admin
+            uaa_admin_client_secret: ((uaa_scim_users_admin_password))
+            notifications_client_username: FAKE-CLIENT #TODO: replace when notifications enabled https://www.pivotaltracker.com/story/show/136381741
+            notifications_client_secret: FAKE-SECRET #TODO: replace when notifications enabled https://www.pivotaltracker.com/story/show/136381741
+        syslog_aggregator:
+          address: ~
+          port: ~
+          transport: ~
+
+- type: replace
+  path: /instance_groups/name=mysql?/jobs/name=mysql/properties/cf_mysql/seeded_databases/-
+  value:
+    name: monitor
+    username: monitordb_user
+    password: ((monitordb_password))
+
+- type: replace
+  path: /variables/-
+  value:
+    name: monitordb_password
+    type: password
