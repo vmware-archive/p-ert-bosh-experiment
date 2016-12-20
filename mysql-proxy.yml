@@ -13,6 +13,22 @@
     jobs:
     - name: consul_agent
       release: consul
+      properties:
+        consul:
+          encrypt_keys:
+          - ((consul_encrypt_key))
+          ca_cert: "((consul_agent.ca))"
+          agent_cert: "((consul_agent.certificate))"
+          agent_key: "((consul_agent.private_key))"
+          server_cert: "((consul_server.certificate))"
+          server_key: "((consul_server.private_key))"
+          agent:
+            domain: cf.internal
+            servers:
+              lan: #TODO: linkify?
+              - 10.0.1.194
+              - 10.0.1.195
+              - 10.0.1.196
     - name: proxy
       release: cf-mysql
       properties:
@@ -38,21 +54,6 @@
           address: ~
           port: ~
           transport: ~
-        consul:
-          encrypt_keys:
-          - ((consul_encrypt_key))
-          ca_cert: "((consul_agent.ca))"
-          agent_cert: "((consul_agent.certificate))"
-          agent_key: "((consul_agent.private_key))"
-          server_cert: "((consul_server.certificate))"
-          server_key: "((consul_server.private_key))"
-          agent:
-            domain: cf.internal
-            servers:
-              lan: #TODO: linkify?
-              - 10.0.1.194
-              - 10.0.1.195
-              - 10.0.1.196
 
 - type: replace
   path: /variables/-
