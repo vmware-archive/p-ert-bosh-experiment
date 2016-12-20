@@ -20,6 +20,8 @@
         mysql-monitoring:
           recipient_email: "Fill in your desired email address" #TODO: make this configurable
           replication-canary:
+            cluster_ips:
+            - 10.0.1.193 #TODO: linkify?
             canary_database: monitor
             canary_username: monitordb_user
             canary_password: ((monitordb_password))

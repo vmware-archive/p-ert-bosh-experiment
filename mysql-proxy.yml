@@ -38,6 +38,9 @@
             api_password: admin
             api_username: ((dashboard_password))
             consul_enabled: true
+          mysql:
+            cluster_ips: #TODO: linkify?
+            - 10.0.1.193
         nats:
           user: nats
           password: ((nats_password))
