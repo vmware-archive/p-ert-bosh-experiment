@@ -17,14 +17,9 @@
         domain: ((system_domain))
         cf_mysql:
           external_host: "p-mysql-ert.((system_domain))"
-        cf:
-          skip_ssl_validation: true
         mysql-monitoring:
           recipient_email: "Fill in your desired email address" #TODO: make this configurable
-          cluster_identifier: "pcf-mysql"
           replication-canary:
-            cluster_ips:
-            - 10.0.1.193 #TODO: linkify?
             canary_database: monitor
             canary_username: monitordb_user
             canary_password: ((monitordb_password))
