@@ -35,8 +35,8 @@
         cf_mysql:
           external_host: "p-mysql-ert.((system_domain))"
           proxy:
-            api_password: admin
-            api_username: ((dashboard_password))
+            api_password: ((dashboard_password))
+            api_username: admin
             consul_enabled: true
           mysql:
             cluster_ips: #TODO: linkify when cf-deployment does
