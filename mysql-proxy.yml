@@ -25,7 +25,7 @@
           agent:
             domain: cf.internal
             servers:
-              lan: #TODO: linkify?
+              lan: #TODO: linkify when cf-deployment does
               - 10.0.1.194
               - 10.0.1.195
               - 10.0.1.196
@@ -39,12 +39,12 @@
             api_username: ((dashboard_password))
             consul_enabled: true
           mysql:
-            cluster_ips: #TODO: linkify?
+            cluster_ips: #TODO: linkify when cf-deployment does
             - 10.0.1.193
         nats:
           user: nats
           password: ((nats_password))
-          machines: #TODO: linkify?
+          machines: #TODO: linkify when cf-deployment does
           - 10.0.1.197
           - 10.0.1.198
           port: 4222
