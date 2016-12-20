@@ -31,7 +31,7 @@
             write_read_delay: 20
             poll_frequency: 30
             uaa_admin_client_username: admin
-            uaa_admin_client_secret: ((uaa_scim_users_admin_password))
+            uaa_admin_client_secret: ((uaa_admin_client_secret))
             notifications_client_username: FAKE-CLIENT #TODO: replace when notifications enabled https://www.pivotaltracker.com/story/show/136381741
             notifications_client_secret: FAKE-SECRET #TODO: replace when notifications enabled https://www.pivotaltracker.com/story/show/136381741
             switchboard_count: 1
