@@ -1,0 +1,62 @@
+- type: replace
+  path: /instance_groups/-
+  value:
+    name: mysql_proxy
+    azs: [z1]
+    instances: 1
+    vm_type: t2.small
+    stemcell: default
+    networks:
+    - name: private
+    vm_extensions:
+    - cf-internet-required
+    jobs:
+    - name: consul_agent
+      release: consul
+    - name: proxy
+      release: cf-mysql
+      properties:
+        cf_mysql:
+          external_host: "p-mysql-ert.((system_domain))"
+          proxy:
+            api_password: admin
+            api_username: ((dashboard_password))
+            proxy_ips: #TODO: linkify?
+            - 10.0.1.199
+            consul_enabled: true
+          mysql:
+            cluster_ips: #TODO: linkify?
+            - 10.0.1.193
+        nats:
+          user: nats
+          password: ((nats_password))
+          machines: #TODO: linkify?
+          - 10.0.1.197
+          - 10.0.1.198
+          port: 4222
+        syslog_aggregator:
+          address: ~
+          port: ~
+          transport: ~
+        consul:
+          encrypt_keys:
+          - ((consul_encrypt_key))
+          ca_cert: "((consul_agent.ca))"
+          agent_cert: "((consul_agent.certificate))"
+          agent_key: "((consul_agent.private_key))"
+          server_cert: "((consul_server.certificate))"
+          server_key: "((consul_server.private_key))"
+          agent:
+            domain: cf.internal
+            servers:
+              lan: #TODO: linkify?
+              - 10.0.1.194
+              - 10.0.1.195
+              - 10.0.1.196
+
+- type: replace
+  path: /variables/-
+  value:
+    name: dashboard_password
+    type: password
+

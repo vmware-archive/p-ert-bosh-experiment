@@ -34,6 +34,9 @@
             uaa_admin_client_secret: ((uaa_scim_users_admin_password))
             notifications_client_username: FAKE-CLIENT #TODO: replace when notifications enabled https://www.pivotaltracker.com/story/show/136381741
             notifications_client_secret: FAKE-SECRET #TODO: replace when notifications enabled https://www.pivotaltracker.com/story/show/136381741
+            switchboard_count: 1
+            switchboard_username: admin
+            switchboard_password: ((dashboard_password))
         syslog_aggregator:
           address: ~
           port: ~
