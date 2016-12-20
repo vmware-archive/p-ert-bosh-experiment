@@ -29,8 +29,8 @@
             poll_frequency: 30
             uaa_admin_client_username: admin
             uaa_admin_client_secret: ((uaa_admin_client_secret))
-            notifications_client_username: FAKE-CLIENT #TODO: replace when notifications enabled https://www.pivotaltracker.com/story/show/136381741
-            notifications_client_secret: FAKE-SECRET #TODO: replace when notifications enabled https://www.pivotaltracker.com/story/show/136381741
+            notifications_client_username: monitoring-notifications-client-user
+            notifications_client_secret: ((monitoring_notifications_client_secret))
             switchboard_count: 1
             switchboard_username: admin
             switchboard_password: ((dashboard_password))
@@ -46,4 +46,10 @@
   path: /variables/-
   value:
     name: monitordb_password
+    type: password
+
+- type: replace
+  path: /variables/-
+  value:
+    name: monitoring_notifications_client_secret
     type: password
