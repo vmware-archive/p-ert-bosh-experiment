@@ -34,10 +34,6 @@
             switchboard_count: 1
             switchboard_username: admin
             switchboard_password: ((dashboard_password))
-        syslog_aggregator:
-          address: ~
-          port: ~
-          transport: ~
 
 - type: replace
   path: /instance_groups/name=mysql?/jobs/name=mysql/properties/cf_mysql/seeded_databases/-
