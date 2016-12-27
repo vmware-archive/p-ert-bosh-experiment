@@ -28,7 +28,7 @@
             CF_UAA_SERVER_URL: "https://uaa.((system_domain))"
         env:
           invitations_client_secret: ((invitations_client_password))
-          secret_token: (( apps_manager_secret_token ))
+          secret_token: ((apps_manager_secret_token))
           cf_cc_api_url: "https://api.((system_domain))"
           cf_loggregator_http_url: https://loggregator.((system_domain))
           cf_loggregator_websocket_url: wss://loggregator.((system_domain)):4443
