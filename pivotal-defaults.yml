@@ -5,3 +5,15 @@
 - type: replace
   path: /instance_groups/name=router/jobs/name=gorouter?/properties/router/tracing/enable_zipkin
   value: true
+
+- type: replace
+  path: /instance_groups/name=api/jobs/name=cloud_controller_ng?/properties/system_domain_organization
+  value: system
+
+- type: replace
+  path: /instance_groups/name=api/jobs/name=cloud_controller_worker?/properties/system_domain_organization
+  value: system
+
+- type: replace
+  path: /instance_groups/name=cc_clock/jobs/name=cloud_controller_clock?/properties/system_domain_organization
+  value: system
