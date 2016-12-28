@@ -51,7 +51,7 @@
           app_usage_service:
             name: app_usage_db_service
             port: 3306 # TODO: Linkify
-            ip: 10.0.1.193 # TODO: Linkify
+            ip: 10.0.31.193 # TODO: Linkify
             username: app_usage_db_user
             password: ((app_usage_db_password))
         ssl:
