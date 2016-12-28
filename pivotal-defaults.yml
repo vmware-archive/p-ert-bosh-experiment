@@ -25,3 +25,18 @@
     total_services: -1
     total_routes: 1000
     non_basic_services_allowed: true
+
+- type: replace
+  path: /instance_groups/name=api/jobs/name=cloud_controller_ng?/properties/app_domains
+  value:
+  - ((apps_domain))
+
+- type: replace
+  path: /instance_groups/name=api/jobs/name=cloud_controller_worker?/properties/app_domains
+  value:
+  - ((apps_domain))
+
+- type: replace
+  path: /instance_groups/name=cc_clock/jobs/name=cloud_controller_clock?/properties/app_domains
+  value:
+  - ((apps_domain))
