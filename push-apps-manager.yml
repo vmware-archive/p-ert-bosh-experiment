@@ -49,10 +49,10 @@
                 href: /tools
         databases:
           app_usage_service:
-            name: app_usage_db_service
+            name: app_usage_service
             port: 3306 # TODO: Linkify
             ip: 10.0.1.197 # TODO: Linkify
-            username: app_usage_db_user
+            username: app_usage
             password: ((app_usage_db_password))
         ssl:
           skip_cert_verify: true
@@ -137,7 +137,7 @@
   path: /instance_groups/name=mysql?/jobs/name=mysql/properties/cf_mysql/mysql/seeded_databases/-
   value:
     name: app_usage_service
-    username: app_usage_db_user
+    username: app_usage
     password: ((app_usage_db_password))
 
 - type: replace
