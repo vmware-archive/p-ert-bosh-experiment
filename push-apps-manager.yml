@@ -51,7 +51,7 @@
           app_usage_service:
             name: app_usage_db_service
             port: 3306 # TODO: Linkify
-            ip: "p-mysql-ert.((system_domain))"
+            ip: 10.0.1.197 # TODO: Linkify
             username: app_usage_db_user
             password: ((app_usage_db_password))
         ssl:

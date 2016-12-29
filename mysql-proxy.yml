@@ -8,6 +8,8 @@
     stemcell: default
     networks:
     - name: private
+      static_ips:
+      - 10.0.1.197
     vm_extensions:
     - cf-internet-required
     jobs:
