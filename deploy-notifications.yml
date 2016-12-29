@@ -1,0 +1,81 @@
+- type: replace
+  path: /instance_groups/-
+  value:
+    name: deploy-notifications
+    azs: [z1]
+    instances: 1
+    vm_type: t2.small
+    stemcell: default
+    networks:
+    - name: private
+    lifecycle: errand
+    vm_extensions:
+    - cf-internet-required
+    jobs:
+    - name: deploy-notifications
+      release: notifications
+      properties:
+        domain: ((system_domain))
+        ssl:
+          skip_cert_verify: true
+        notifications:
+          app_domain: ((system_domain))
+          network: notifications
+          encryption_key: ((notifications_encryption_key))
+          enable_diego: true
+          instance_count: 3
+          organization: system
+          space: notifications-with-ui
+          error_on_misconfiguration: false
+          cf:
+            admin_user: admin
+            admin_password: ((uaa_scim_users_admin_password))
+          uaa:
+            admin_client_id: admin
+            admin_client_secret: ((uaa_admin_client_secret))
+            client_id: notifications
+            client_secret: ((notifications_client_password))
+          database:
+            url: mysql://notifications:((notifications_db_password))@10.0.1.199:3306/notifications
+            max_open_connections: 10
+          default_template: |
+            {
+              "name": "Default Template",
+              "subject": "CF Notification: {{.Subject}}",
+              "html": "\u003ctable width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse;font-family: Helvetica, Arial,sans-serif\"\u003e\n    \u003ctbody\u003e\n        \u003ctr\u003e\n            \u003ctd width=\"100%\" align=\"center\" bgcolor=\"#F8f8f8\" style=\"padding-right:10px;padding-left:10px\"\u003e\n                \u003ctable width=\"600\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse\"\u003e\n                    \u003ctbody\u003e\n                        \u003ctr\u003e\n                            \u003ctd align=\"left\" valign=\"top\" style=\"padding-bottom:30px;padding-top:30px\"\u003e\n                              \u003cimg src=\"http://notifications-ui.{{.Domain}}/assets/pivotal_logo.png\"\n                                alt=\"Pivotal CF\" border=\"0\" style=\"display:block\" class=\"CToWUd\"\n                                width=\"166px\" height=\"35px\"\u003e\n                            \u003c/td\u003e\n                        \u003c/tr\u003e\n                    \u003c/tbody\u003e\n                \u003c/table\u003e\n                \u003ctable width=\"600\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse\"\u003e\n                    \u003ctbody\u003e\n                        \u003ctr\u003e\n                            \u003ctd align=\"left\" valign=\"top\" bgcolor=\"#FFFFFF\"\u003e\n                                \u003ctable width=\"600\" cellpadding=\"40\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse;border:1px solid #e0e4e5\"\u003e\n                                    \u003ctbody\u003e\n                                        \u003ctr\u003e\n                                            \u003ctd style=\"color:#666666;font-size:16px;line-height:22px\"\u003e\n                                                \u003cdiv\u003e\n                                                    {{.HTML}}\n                                                \u003c/div\u003e\n                                            \u003c/td\u003e\n                                        \u003c/tr\u003e\n                                    \u003c/tbody\u003e\n                                \u003c/table\u003e\n                            \u003c/td\u003e\n                        \u003c/tr\u003e\n                    \u003c/tbody\u003e\n                \u003c/table\u003e\n                \u003ctable width=\"600\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse;font-size:12px;color:#b4b4b4\"\u003e\n                    \u003ctbody\u003e\n                        \u003ctr\u003e\n                          \u003ctd align=\"left\" valign=\"middle\" style=\"padding-top:20px;padding-bottom:20px\"\u003eManage your \u003ca href=\"https://notifications-ui.{{.Domain}}/preferences\"\n                                target=\"_blank\"\u003enotification preferences\u003c/a\u003e or\n                              \u003ca href=\"https://notifications-ui.{{.Domain}}/unsubscribe/{{.UnsubscribeID}}\"\n                                target=\"_blank\"\u003eunsubscribe\u003c/a\u003e\n                            \u003c/td\u003e\n                        \u003c/tr\u003e\n                        \u003ctr\u003e\n                            \u003ctd align=\"left\" valign=\"middle\" style=\"padding-bottom:20px\"\u003ePivotal Cloud Foundry, and the Pivotal Cloud Foundry logo are registered\n                                trademarks or trademarks of Pivotal Software, Inc.\n                                in the United States and other countries. All other\n                                trademarks used herein are the property of their\n                                respective owners.\n                                \u003ca\u003e\n                            \u003c/td\u003e\n                        \u003c/tr\u003e\n                        \u003ctr\u003e\n                            \u003ctd align=\"left\" valign=\"middle\" style=\"padding-bottom:20px\"\u003e\u00A9 2015 Pivotal Software, Inc. All rights reserved.\n                                Published in the USA.\n                                \u003ca\u003e\n                            \u003c/td\u003e\n                        \u003c/tr\u003e\n                    \u003c/tbody\u003e\n                \u003c/table\u003e\n            \u003c/td\u003e\n        \u003c/tr\u003e\n    \u003c/tbody\u003e\n\u003c/table\u003e\n",
+              "text": "_____\n\n\nPivotal CF\n\n{{.Text}}\n\nManage your notification preferences:\nhttps://notifications-ui.{{.Domain}}/preferences\n\nUnsubscribe from Pivotal emails:\nhttps://notifications-ui.{{.Domain}}/unsubscribe/{{.UnsubscribeID}}\n\nPivotal Cloud Foundry, and the Pivotal Cloud Foundry logo are registered trademarks or trademarks of Pivotal Software, Inc. in the United States and other countries. All other trademarks used herein are the property of their respective owners.\n\n\u00A9 2015 Pivotal Software, Inc. All rights reserved. Published in the USA.\n\n______\n",
+              "metadata": {}
+            }
+
+- type: replace
+  path: /variables/-
+  value:
+    name: notifications_encryption_key
+    type: password
+
+- type: replace
+  path: /instance_groups/name=uaa?/jobs/name=uaa/properties/uaa/clients/notifications
+  value:
+    id: notifications
+    secret: ((notifications_client_password))
+    authorities: cloud_controller.admin,scim.read,notifications.write,critical_notifications.write,emails.write
+    authorized-grant-types: client_credentials
+
+- type: replace
+  path: /variables/-
+  value:
+    name: notifications_client_password
+    type: password
+
+- type: replace
+  path: /instance_groups/name=mysql?/jobs/name=mysql/properties/cf_mysql/mysql/seeded_databases/-
+  value:
+    name: notifications
+    username: notifications
+    password: ((notifications_db_password))
+
+- type: replace
+  path: /variables/-
+  value:
+    name: notifications_db_password
+    type: password
