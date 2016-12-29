@@ -1,0 +1,29 @@
+- type: replace
+  path: /instance_groups/-
+  value:
+    name: autoscaling-destroy-broker
+    azs: [z1]
+    instances: 1
+    vm_type: t2.small
+    stemcell: default
+    networks:
+    - name: private
+    lifecycle: errand
+    vm_extensions:
+    - cf-internet-required
+    jobs:
+    - name: destroy-broker
+      release: cf-autoscaling
+      properties:
+        autoscale:
+          broker:
+            user: autoscaling_broker_user
+            password: ((autoscaling_broker_password))
+          cf:
+            admin_user: admin
+            admin_password: ((uaa_scim_users_admin_password))
+          organization: system
+          space: autoscaling
+        domain: ((system_domain))
+        ssl:
+          skip_cert_verify: true
