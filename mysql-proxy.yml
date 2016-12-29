@@ -9,7 +9,7 @@
     networks:
     - name: private
       static_ips:
-      - 10.0.1.197
+      - 10.0.1.199
     vm_extensions:
     - cf-internet-required
     jobs:
