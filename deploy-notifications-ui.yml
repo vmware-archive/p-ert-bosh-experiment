@@ -1,0 +1,56 @@
+- type: replace
+  path: /instance_groups/-
+  value:
+    name: deploy-notifications-ui
+    azs: [z1]
+    instances: 1
+    vm_type: t2.small
+    stemcell: default
+    networks:
+    - name: private
+    lifecycle: errand
+    vm_extensions:
+    - cf-internet-required
+    jobs:
+    - name: deploy-notifications-ui
+      release: notifications-ui
+      properties:
+        domain: ((system_domain))
+        ssl:
+          skip_cert_verify: true
+        notifications_ui:
+          organization: system
+          space: notifications-with-ui
+          app_domain: ((system_domain))
+          network: notifications
+          encryption_key: ((notifications_encryption_key))
+          footer_text: "&copy;2016 Pivotal Inc. All rights reserved. Pivotal CF"
+          footer_image: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAAARCAYAAACRroFGAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChNYWNpbnRvc2gpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjFEM0FBQTg3QkNFQTExRTM5MDk3RUU4MjZGMEZCMzVEIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjFEM0FBQTg4QkNFQTExRTM5MDk3RUU4MjZGMEZCMzVEIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MUQzQUFBODVCQ0VBMTFFMzkwOTdFRTgyNkYwRkIzNUQiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MUQzQUFBODZCQ0VBMTFFMzkwOTdFRTgyNkYwRkIzNUQiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5msHvmAAAD5ElEQVR42uRYa0hVQRC+Xi2pQMseZi97E2RPCyJ6WdDDEo3oIRoVmf0pyiDQTBKSsAgk8If5qxBBstTCDHtIlpGRyrUsKqMMLYIkrTStLPsmvoXldI5e02tGAx+zu2d2dnd2Z3b2uKWkprfbfqc2oBYoBTJj9kRf1j+ijwNsFlCMb8ts/zhhPTVg/lbr8bDoJ+0TiHAoyRMOBa19YEG+YJNlIzGfe70xpm6kejk1LA8FJgILADsQBhwB4vg9DRgJ1PwFO70lPwv0upFeY2f2G3YtEOwWMBDYjXoCZGQH02z/EXl09BHGKIdhLqG4BRgCjAZeoS2FrvgSMjGoh6C8k92q0XbQwlWmgSWzmgg5B9sHgG0CFgHDgUbgLuNhk8X0ljMMKKqC7GFtLD8w2fSlgLhoM9Ag8wceADdkfd02EqlBKw8iD2LgrmR9EhDK8ndM8Bgm0GCiayPlZMLhXMx8sBxgjEF2G5CE75HQVWiiayyhaLBmIAm+FwEvk36yERESpAGnLh17J0HSjXFJ0RsLUYllq1h2B4It5JQh87HwFugfh3IhDfQZSAX2ytDAR2AYkAe52Sa67gA7NCRzzj5gF2igT4yjK7ixclrreszdMNgUsEPAHDUpLKzRwi3fgV1FnwrwuUCIdgkofWKIQFazyePpxl+AxdBTocmfZmD2Bo5Sp07PIX/GZDpiMB+WwyBTZJhHvMmp7dpJgpJEQPKkZ8B2NreILZzQd558DXT0szhFoquA5XXkWbqBaPinvEWFVkKfp5NrCiIvNxroT8nK3dzJJdGUgRZiwPtO6Msl92LANDPSFXE1lkeRV1roU4G1PzDCyTX5kj925e2WxwHey+TpSk4RZJ9gx6tQDKB7XOfp9NZ2ONuka7uFym8mG9cZqRP8w2VG4rXs6IbOczSSnJx9bAvmWJKx57s4rWk1GMtl7tYdUifFHydopgqg5AWGvKeZ3M9C13iLVKQjqiWf12eNJC4niR2rITCUxJPVrOcYxEvIIyDnZbhAJFBHaYniBwu3MpLKqaZCR5TLM+4ecLnN3FkxwFcTVzvJ/Eoy+SIsKhb8EZPTJGA65U7ozyfKy423C1zFzHoYsoSpRxzfnumQWcq/GWLoYice0B5MMuvoum52FxkpQzJvYAYfor/SA+NpQF0CeyyrkkNdY8J6W7sdT0EuQ+um9Emimc4bNZdGtfHmXAu8kAUCkUxS1zvpCW38VSRG2gBstTM9F5R1wQhlHfXBQPJ3IJp/FoRuAgcsZI+DLeEzQiWrTTRYqPHRDUpgwphFvWr+DoPLB/A9mclbttowd/1yKjW0yTw82efhTwEGAJ+vU/dgy94oAAAAAElFTkSuQmCC"
+          enable_diego: true
+          instance_count: 2
+          cf:
+            admin_user: admin
+            admin_password: ((uaa_scim_users_admin_password))
+          uaa:
+            admin_client: admin
+            admin_secret: ((uaa_admin_client_secret))
+            client_id: notifications_ui_client
+            client_secret: ((notifications_ui_client_password))
+
+- type: replace
+  path: /instance_groups/name=uaa?/jobs/name=uaa/properties/uaa/clients/notifications_ui_client
+  value:
+    id: notifications_ui_client
+    secret: ((notifications_ui_client_password))
+    scope: notification_preferences.read,notification_preferences.write,openid
+    authorized-grant-types: authorization_code,client_credentials,refresh_token
+    authorities: notification_preferences.admin
+    autoapprove: true
+    override: true
+    redirect-uri: "https://notifications-ui.((system_domain))/sessions/create"
+
+- type: replace
+  path: /variables/-
+  value:
+    name: notifications_ui_client_password
+    type: password
