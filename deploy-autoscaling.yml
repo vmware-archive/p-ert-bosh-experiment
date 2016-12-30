@@ -12,7 +12,7 @@
     vm_extensions:
     - cf-internet-required
     jobs:
-    - name: deploy-notifications
+    - name: deploy-autoscaling
       release: cf-autoscaling
       properties:
         app_domains:
