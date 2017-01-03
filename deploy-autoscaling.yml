@@ -55,7 +55,7 @@
 - type: replace
   path: /variables/-
   value:
-    name: notifications_db_password
+    name: autoscale_db_password
     type: password
 
 - type: replace
