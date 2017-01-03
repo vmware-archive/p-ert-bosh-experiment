@@ -19,6 +19,5 @@
             cluster_ips:
             - 10.0.1.193
             galera_healthcheck:
-          galera_healthcheck:
-            endpoint_username: galera_healthcheck
-            endpoint_password: "((cf_mysql_mysql_galera_healthcheck_endpoint_password))"
+              endpoint_username: galera_healthcheck
+              endpoint_password: "((cf_mysql_mysql_galera_healthcheck_endpoint_password))"
