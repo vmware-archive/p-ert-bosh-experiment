@@ -8,6 +8,7 @@
     stemcell: default
     networks:
     - name: private
+    lifecycle: errand
     vm_extensions:
     - internet-required
     jobs:
