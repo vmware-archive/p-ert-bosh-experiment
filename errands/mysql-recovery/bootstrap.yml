@@ -9,8 +9,6 @@
     networks:
     - name: private
     lifecycle: errand
-    vm_extensions:
-    - cf-internet-required
     jobs:
     - name: bootstrap
       release: cf-mysql
