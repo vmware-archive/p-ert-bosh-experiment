@@ -9,8 +9,6 @@
     networks:
     - name: private
     lifecycle: errand
-    vm_extensions:
-    - internet-required
     jobs:
     - name: rejoin-unsafe
       release: cf-mysql
