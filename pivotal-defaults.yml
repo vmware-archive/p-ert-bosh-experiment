@@ -1,3 +1,9 @@
+# Instance counts
+
+- type: replace
+  path: /instance_groups/name=diego-cell/instances
+  value: 3
+
 # Garden cleanup
 
 - type: replace
