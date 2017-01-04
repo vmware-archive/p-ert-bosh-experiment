@@ -10,7 +10,7 @@
     - name: private
     lifecycle: errand
     vm_extensions:
-    - cf-internet-required
+    - internet-required
     jobs:
     - name: smoke-tests
       release: cf

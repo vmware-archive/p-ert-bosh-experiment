@@ -9,7 +9,7 @@
     networks:
     - name: private
     vm_extensions:
-    - cf-internet-required
+    - internet-required
     jobs:
     - name: bootstrap
       release: cf-mysql
