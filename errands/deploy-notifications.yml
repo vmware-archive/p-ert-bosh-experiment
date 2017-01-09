@@ -30,6 +30,11 @@
           cf:
             admin_user: admin
             admin_password: ((uaa_scim_users_admin_password))
+          smtp:
+            host: ((notifications_smtp_host))
+            port: 25
+            tls: false
+            auth_mechanism: none
           uaa:
             admin_client_id: admin
             admin_client_secret: ((uaa_admin_client_secret))
