@@ -32,10 +32,12 @@
             admin_user: admin
             admin_password: ((uaa_scim_users_admin_password))
           smtp:
-            host: ((notifications_smtp_host))
-            port: 25
+            host: ((smtp_host_name))
+            port: ((smtp_host_port))
+            user: ((smtp_sender_username))
+            pass: ((smtp_sender_password))
             tls: false
-            auth_mechanism: none
+            auth_mechanism: plain
           uaa:
             admin_client_id: admin
             admin_client_secret: ((uaa_admin_client_secret))
