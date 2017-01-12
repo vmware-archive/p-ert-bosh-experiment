@@ -135,6 +135,11 @@ vm_extensions:
       size: 1048576
       type: pd-standard
 
+# to support both p-mysql and p-ert
+- name: internet-required
+  cloud_properties:
+    ephemeral_external_ip: true
+
 - name: cf-internet-required
   cloud_properties:
     ephemeral_external_ip: true
