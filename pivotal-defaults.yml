@@ -7,33 +7,33 @@
 # Garden cleanup
 
 - type: replace
-  path: /instance_groups/name=diego-cell/jobs/name=garden?/properties/garden/graph_cleanup_threshold_in_mb
+  path: /instance_groups/name=diego-cell/jobs/name=garden/properties/garden/graph_cleanup_threshold_in_mb
   value: 10_240
 
 # Zipkin
 
 - type: replace
-  path: /instance_groups/name=router/jobs/name=gorouter?/properties/router/tracing/enable_zipkin
+  path: /instance_groups/name=router/jobs/name=gorouter/properties/router/tracing?/enable_zipkin
   value: true
 
 # System domain
 
 - type: replace
-  path: /instance_groups/name=api/jobs/name=cloud_controller_ng?/properties/system_domain_organization
+  path: /instance_groups/name=api/jobs/name=cloud_controller_ng/properties/system_domain_organization
   value: system
 
 - type: replace
-  path: /instance_groups/name=api/jobs/name=cloud_controller_worker?/properties/system_domain_organization
+  path: /instance_groups/name=api/jobs/name=cloud_controller_worker/properties/system_domain_organization
   value: system
 
 - type: replace
-  path: /instance_groups/name=cc_clock/jobs/name=cloud_controller_clock?/properties/system_domain_organization
+  path: /instance_groups/name=cc_clock/jobs/name=cloud_controller_clock/properties/system_domain_organization
   value: system
 
 # Runaway quota
 
 - type: replace
-  path: /instance_groups/name=api/jobs/name=cloud_controller_ng?/properties/cc/quota_definitions/runaway
+  path: /instance_groups/name=api/jobs/name=cloud_controller_ng/properties/cc/quota_definitions/runaway?
   value:
     memory_limit: 102400
     total_services: -1
@@ -43,24 +43,24 @@
 # Apps domain
 
 - type: replace
-  path: /instance_groups/name=api/jobs/name=cloud_controller_ng?/properties/app_domains
+  path: /instance_groups/name=api/jobs/name=cloud_controller_ng/properties/app_domains
   value:
   - ((apps_domain))
 
 - type: replace
-  path: /instance_groups/name=api/jobs/name=cloud_controller_worker?/properties/app_domains
+  path: /instance_groups/name=api/jobs/name=cloud_controller_worker/properties/app_domains
   value:
   - ((apps_domain))
 
 - type: replace
-  path: /instance_groups/name=cc_clock/jobs/name=cloud_controller_clock?/properties/app_domains
+  path: /instance_groups/name=cc_clock/jobs/name=cloud_controller_clock/properties/app_domains
   value:
   - ((apps_domain))
 
 # App security groups
 
 - type: replace
-  path: /instance_groups/name=api/jobs/name=cloud_controller_ng?/properties/cc/security_group_definitions
+  path: /instance_groups/name=api/jobs/name=cloud_controller_ng/properties/cc/security_group_definitions
   value:
   - name: default_security_group
     rules:
@@ -70,17 +70,17 @@
         destination: 169.255.0.0-255.255.255.255
 
 - type: replace
-  path: /instance_groups/name=api/jobs/name=cloud_controller_ng?/properties/cc/default_running_security_groups
+  path: /instance_groups/name=api/jobs/name=cloud_controller_ng/properties/cc/default_running_security_groups
   value:
   - default_security_group
 
 - type: replace
-  path: /instance_groups/name=api/jobs/name=cloud_controller_ng?/properties/cc/default_staging_security_groups
+  path: /instance_groups/name=api/jobs/name=cloud_controller_ng/properties/cc/default_staging_security_groups
   value:
   - default_security_group
 
 - type: replace
-  path: /instance_groups/name=api/jobs/name=cloud_controller_worker?/properties/cc/security_group_definitions
+  path: /instance_groups/name=api/jobs/name=cloud_controller_worker/properties/cc/security_group_definitions
   value:
   - name: default_security_group
     rules:
@@ -90,17 +90,17 @@
         destination: 169.255.0.0-255.255.255.255
 
 - type: replace
-  path: /instance_groups/name=api/jobs/name=cloud_controller_worker?/properties/cc/default_running_security_groups
+  path: /instance_groups/name=api/jobs/name=cloud_controller_worker/properties/cc/default_running_security_groups
   value:
   - default_security_group
 
 - type: replace
-  path: /instance_groups/name=api/jobs/name=cloud_controller_worker?/properties/cc/default_staging_security_groups
+  path: /instance_groups/name=api/jobs/name=cloud_controller_worker/properties/cc/default_staging_security_groups
   value:
   - default_security_group
 
 - type: replace
-  path: /instance_groups/name=cc_clock/jobs/name=cloud_controller_clock?/properties/cc/security_group_definitions
+  path: /instance_groups/name=cc_clock/jobs/name=cloud_controller_clock/properties/cc/security_group_definitions
   value:
   - name: default_security_group
     rules:
@@ -110,11 +110,11 @@
         destination: 169.255.0.0-255.255.255.255
 
 - type: replace
-  path: /instance_groups/name=cc_clock/jobs/name=cloud_controller_clock?/properties/cc/default_running_security_groups
+  path: /instance_groups/name=cc_clock/jobs/name=cloud_controller_clock/properties/cc/default_running_security_groups
   value:
   - default_security_group
 
 - type: replace
-  path: /instance_groups/name=cc_clock/jobs/name=cloud_controller_clock?/properties/cc/default_staging_security_groups
+  path: /instance_groups/name=cc_clock/jobs/name=cloud_controller_clock/properties/cc/default_staging_security_groups
   value:
   - default_security_group

@@ -58,7 +58,7 @@
           skip_cert_verify: true
 
 - type: replace
-  path: /instance_groups/name=uaa?/jobs/name=uaa/properties/uaa/scim/users/-
+  path: /instance_groups/name=uaa/jobs/name=uaa/properties/uaa/scim/users/-
   value:
     name: "push_apps_manager"
     password: ((push_apps_manager_password))
@@ -66,7 +66,7 @@
     - cloud_controller.admin
 
 - type: replace
-  path: /instance_groups/name=uaa?/jobs/name=uaa/properties/uaa/clients/apps_manager
+  path: /instance_groups/name=uaa/jobs/name=uaa/properties/uaa/clients/apps_manager?
   value:
     id: apps_manager
     secret: ((apps_manager_client_password))
@@ -84,7 +84,7 @@
     redirect-uri: "https://apps.((system_domain)),https://apps.((system_domain))/*"
 
 - type: replace
-  path: /instance_groups/name=uaa?/jobs/name=uaa/properties/uaa/clients/apps_manager_js
+  path: /instance_groups/name=uaa/jobs/name=uaa/properties/uaa/clients/apps_manager_js?
   value:
     name: "PCF Apps Manager"
     override: true
@@ -101,7 +101,7 @@
     redirect-uri: "https://apps.((system_domain)),https://apps.((system_domain))/*"
 
 - type: replace
-  path: /instance_groups/name=uaa?/jobs/name=uaa/properties/uaa/clients/invitations
+  path: /instance_groups/name=uaa/jobs/name=uaa/properties/uaa/clients/invitations?
   value:
     id: invitations
     secret: ((invitations_client_password))
@@ -134,7 +134,7 @@
     type: password
 
 - type: replace
-  path: /instance_groups/name=mysql?/jobs/name=mysql/properties/cf_mysql/mysql/seeded_databases/-
+  path: /instance_groups/name=mysql/jobs/name=mysql/properties/cf_mysql/mysql/seeded_databases/-
   value:
     name: app_usage_service
     username: app_usage
