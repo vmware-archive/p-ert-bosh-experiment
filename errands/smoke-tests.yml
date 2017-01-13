@@ -28,7 +28,7 @@
           # cf_dial_timeout_in_seconds: (( .properties.cf_dial_timeout_in_seconds.value )) TODO: This is an optional property in ERT
 
 - type: replace
-  path: /instance_groups/name=uaa?/jobs/name=uaa/properties/uaa/scim/users/-
+  path: /instance_groups/name=uaa/jobs/name=uaa/properties/uaa/scim/users/-
   value:
     name: "run_smoke_tests_user"
     password: ((run_smoke_tests_password))

@@ -38,7 +38,7 @@
           legalLinks: []
 
 - type: replace
-  path: /instance_groups/name=uaa?/jobs/name=uaa/properties/uaa/clients/pivotal_account
+  path: /instance_groups/name=uaa/jobs/name=uaa/properties/uaa/clients/pivotal_account?
   value:
     id: pivotal_account_client
     secret: ((pivotal_account_client_password))

@@ -38,7 +38,7 @@
             client_secret: ((notifications_ui_client_password))
 
 - type: replace
-  path: /instance_groups/name=uaa?/jobs/name=uaa/properties/uaa/clients/notifications_ui_client
+  path: /instance_groups/name=uaa/jobs/name=uaa/properties/uaa/clients/notifications_ui_client?
   value:
     id: notifications_ui_client
     secret: ((notifications_ui_client_password))

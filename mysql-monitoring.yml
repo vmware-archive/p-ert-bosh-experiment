@@ -36,7 +36,7 @@
             switchboard_password: ((dashboard_password))
 
 - type: replace
-  path: /instance_groups/name=mysql?/jobs/name=mysql/properties/cf_mysql/mysql/seeded_databases/-
+  path: /instance_groups/name=mysql/jobs/name=mysql/properties/cf_mysql/mysql/seeded_databases/-
   value:
     name: monitor
     username: monitordb_user
