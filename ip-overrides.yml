@@ -1,0 +1,12 @@
+- type: replace
+  path: /instance_groups/name=consul/networks/name=private/static_ips
+  value:
+  - 10.0.1.194
+  - 10.0.1.195
+  - 10.0.1.196
+
+- type: replace
+  path: /instance_groups/name=nats/networks/name=private/static_ips
+  value:
+  - 10.0.1.197
+  - 10.0.1.198
