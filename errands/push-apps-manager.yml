@@ -110,6 +110,13 @@
     authorities: emails.write,cloud_controller.read,cloud_controller.write,uaa.resource,scim.invite,notifications.write,cloud_controller.admin
 
 - type: replace
+  path: /releases/-
+  value:
+    name: push-apps-manager-release
+    version: ((push_apps_manager_release_version))
+    url: ((push_apps_manager_release_path))
+
+- type: replace
   path: /variables/-
   value:
     name: push_apps_manager_password

@@ -48,6 +48,13 @@
             }
 
 - type: replace
+  path: /releases/-
+  value:
+    name: notifications
+    version: ((notifications_release_version))
+    url: ((notifications_release_path))
+
+- type: replace
   path: /variables/-
   value:
     name: notifications_encryption_key
