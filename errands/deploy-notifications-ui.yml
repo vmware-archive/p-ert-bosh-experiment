@@ -50,6 +50,13 @@
     redirect-uri: "https://notifications-ui.((system_domain))/sessions/create"
 
 - type: replace
+  path: /releases/-
+  value:
+    name: notifications-ui
+    version: ((notifications_ui_release_version))
+    url: ((notifications_ui_release_path))
+
+- type: replace
   path: /variables/-
   value:
     name: notifications_ui_client_password

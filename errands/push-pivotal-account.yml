@@ -52,6 +52,13 @@
     redirect-uri: "https://account.((system_domain))/sign-in,https://account.((system_domain))/identity/,https://account.((system_domain))/**"
 
 - type: replace
+  path: /releases/-
+  value:
+    name: pivotal-account
+    version: ((pivotal_account_release_version))
+    url: ((pivotal_account_release_path))
+
+- type: replace
   path: /variables/-
   value:
     name: pivotal_account_client_password

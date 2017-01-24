@@ -27,3 +27,10 @@
         domain: ((system_domain))
         ssl:
           skip_cert_verify: true
+
+- type: replace
+  path: /releases/name=cf-autscaling?
+  value:
+    name: cf-autoscaling
+    version: ((cf_autoscaling_release_version))
+    url: ((cf_autoscaling_release_path))

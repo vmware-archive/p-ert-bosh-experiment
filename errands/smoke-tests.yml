@@ -36,6 +36,13 @@
     - cloud_controller.admin
 
 - type: replace
+  path: /releases/-
+  value:
+    name: cf
+    version: ((cf_release_version))
+    url: ((cf_release_path))
+
+- type: replace
   path: /variables/-
   value:
     name: run_smoke_tests_password

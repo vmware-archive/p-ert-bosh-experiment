@@ -43,6 +43,13 @@
     password: ((monitordb_password))
 
 - type: replace
+  path: /releases/-
+  value:
+    name: mysql-monitoring
+    version: ((mysql_monitoring_release_version))
+    url: ((mysql_monitoring_release_path))
+
+- type: replace
   path: /variables/-
   value:
     name: monitordb_password
