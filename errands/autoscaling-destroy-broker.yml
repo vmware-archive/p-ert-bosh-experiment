@@ -29,7 +29,7 @@
           skip_cert_verify: true
 
 - type: replace
-  path: /releases/name=cf-autscaling?
+  path: /releases/name=cf-autoscaling?
   value:
     name: cf-autoscaling
     version: ((cf_autoscaling_release_version))
