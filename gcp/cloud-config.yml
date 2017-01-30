@@ -62,16 +62,6 @@ disk_types:
   cloud_properties:
     type: pd-standard
     encrypted: true
-- name: 500GB
-  disk_size: 512000
-  cloud_properties:
-    type: pd-standard
-    encrypted: true
-- name: 1TB
-  disk_size: 1048576
-  cloud_properties:
-    type: pd-standard
-    encrypted: true
 
 compilation:
   workers: 6
