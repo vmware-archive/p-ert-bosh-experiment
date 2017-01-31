@@ -157,7 +157,7 @@
   value: [*mysql_ip]
 
 - type: replace
-  path: /instance_groups/name=deploy-autoscaling/jobs/name=deploy-autoscaling/properties/autoscale/database/url/
+  path: /instance_groups/name=deploy-autoscaling/jobs/name=deploy-autoscaling/properties/autoscale/database/url
   value: mysql://autoscale:((autoscale_db_password))@10.0.4.193:3306/autoscale
 
 - type: replace
