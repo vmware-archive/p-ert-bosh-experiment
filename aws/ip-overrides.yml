@@ -1,0 +1,201 @@
+- type: replace
+  path: /instance_groups/name=consul/networks/name=private/static_ips
+  value: &consul_ips
+  - 10.0.4.194
+  - 10.0.5.195
+  - 10.0.6.196
+
+- type: replace
+  path: /instance_groups/name=nats/networks/name=private/static_ips
+  value: &nats_ips
+  - 10.0.4.197
+  - 10.0.5.198
+
+- type: replace
+  path: /instance_groups/name=mysql/networks/name=private/static_ips
+  value:
+  - &mysql_ip 10.0.4.193
+
+# ------ insert correct ips -------
+- type: replace
+  path: /instance_groups/name=tcp-router/jobs/name=consul_agent/properties/consul/agent/servers/lan
+  value: *consul_ips
+
+- type: replace
+  path: /instance_groups/name=tcp-emitter/jobs/name=consul_agent/properties/consul/agent/servers/lan
+  value: *consul_ips
+
+- type: replace
+  path: /instance_groups/name=consul/jobs/name=consul_agent/properties/consul/agent/servers/lan
+  value: *consul_ips
+
+- type: replace
+  path: /instance_groups/name=etcd/jobs/name=consul_agent/properties/consul/agent/servers/lan
+  value: *consul_ips
+
+- type: replace
+  path: /instance_groups/name=nats/jobs/name=consul_agent/properties/consul/agent/servers/lan
+  value: *consul_ips
+
+- type: replace
+  path: /instance_groups/name=mysql/jobs/name=consul_agent/properties/consul/agent/servers/lan
+  value: *consul_ips
+
+- type: replace
+  path: /instance_groups/name=diego-bbs/jobs/name=consul_agent/properties/consul/agent/servers/lan
+  value: *consul_ips
+
+- type: replace
+  path: /instance_groups/name=diego-brain/jobs/name=consul_agent/properties/consul/agent/servers/lan
+  value: *consul_ips
+
+- type: replace
+  path: /instance_groups/name=diego-cell/jobs/name=consul_agent/properties/consul/agent/servers/lan
+  value: *consul_ips
+
+- type: replace
+  path: /instance_groups/name=router/jobs/name=consul_agent/properties/consul/agent/servers/lan
+  value: *consul_ips
+
+- type: replace
+  path: /instance_groups/name=uaa/jobs/name=consul_agent/properties/consul/agent/servers/lan
+  value: *consul_ips
+
+- type: replace
+  path: /instance_groups/name=route-emitter/jobs/name=consul_agent/properties/consul/agent/servers/lan
+  value: *consul_ips
+
+- type: replace
+  path: /instance_groups/name=blobstore/jobs/name=consul_agent/properties/consul/agent/servers/lan
+  value: *consul_ips
+
+- type: replace
+  path: /instance_groups/name=cc_clock/jobs/name=consul_agent/properties/consul/agent/servers/lan
+  value: *consul_ips
+
+- type: replace
+  path: /instance_groups/name=api/jobs/name=consul_agent/properties/consul/agent/servers/lan
+  value: *consul_ips
+
+- type: replace
+  path: /instance_groups/name=cc_bridge/jobs/name=consul_agent/properties/consul/agent/servers/lan
+  value: *consul_ips
+
+- type: replace
+  path: /instance_groups/name=doppler/jobs/name=consul_agent/properties/consul/agent/servers/lan
+  value: *consul_ips
+
+- type: replace
+  path: /instance_groups/name=log_controller/jobs/name=consul_agent/properties/consul/agent/servers/lan
+  value: *consul_ips
+
+- type: replace
+  path: /instance_groups/name=log_controller/jobs/name=route_registrar/properties/nats/machines
+  value: *nats_ips
+
+- type: replace
+  path: /instance_groups/name=nats/jobs/name=nats_stream_forwarder/properties/nats/machines
+  value: *nats_ips
+
+- type: replace
+  path: /instance_groups/name=uaa/jobs/name=route_registrar/properties/nats/machines
+  value: *nats_ips
+
+- type: replace
+  path: /instance_groups/name=api/jobs/name=route_registrar/properties/nats/machines
+  value: *nats_ips
+
+- type: replace
+  path: /instance_groups/name=blobstore/jobs/name=route_registrar/properties/nats/machines
+  value: *nats_ips
+
+- type: replace
+  path: /instance_groups/name=router/jobs/name=gorouter/properties/nats/machines
+  value: *nats_ips
+
+- type: replace
+  path: /instance_groups/name=route-emitter/jobs/name=route_emitter/properties/diego/route_emitter/nats/machines
+  value: *nats_ips
+
+- type: replace
+  path: /instance_groups/name=cc_clock/jobs/name=cloud_controller_clock/properties/nats/machines
+  value: *nats_ips
+
+- type: replace
+  path: /instance_groups/name=api/jobs/name=cloud_controller_worker/properties/nats/machines
+  value: *nats_ips
+
+- type: replace
+  path: /instance_groups/name=api/jobs/name=cloud_controller_ng/properties/nats/machines
+  value: *nats_ips
+
+- type: replace
+  path: /instance_groups/name=mysql/jobs/name=mysql/properties/cf_mysql/mysql/cluster_ips
+  value:
+  - *mysql_ip
+
+- type: replace
+  path: /instance_groups/name=uaa/jobs/name=uaa/properties/uaadb/address
+  value: *mysql_ip
+
+- type: replace
+  path: /instance_groups/name=api/jobs/name=cloud_controller_ng/properties/ccdb/address
+  value: *mysql_ip
+
+- type: replace
+  path: /instance_groups/name=api/jobs/name=cloud_controller_worker/properties/ccdb/address
+  value: *mysql_ip
+
+- type: replace
+  path: /instance_groups/name=api/jobs/name=routing-api/properties/routing_api/sqldb/host
+  value: *mysql_ip
+
+- type: replace
+  path: /instance_groups/name=diego-bbs/jobs/name=bbs/properties/diego/bbs/sql/db_host
+  value: *mysql_ip
+
+- type: replace
+  path: /instance_groups/name=cc_clock/jobs/name=cloud_controller_clock/properties/ccdb/address
+  value: *mysql_ip
+
+# Override hardcoded ips in our opsfiles
+
+- type: replace
+  path: /instance_groups/name=mysql-bootstrap/jobs/name=bootstrap/properties/cf_mysql/mysql/cluster_ips
+  value: [*mysql_ip]
+
+- type: replace
+  path: /instance_groups/name=mysql-rejoin-unsafe/jobs/name=rejoin-unsafe/properties/cf_mysql/mysql/cluster_ips
+  value: [*mysql_ip]
+
+- type: replace
+  path: /instance_groups/name=deploy-autoscaling/jobs/name=deploy-autoscaling/properties/autoscale/database/url/
+  value: mysql://autoscale:((autoscale_db_password))@10.0.4.193:3306/autoscale
+
+- type: replace
+  path: /instance_groups/name=deploy-notifications/jobs/name=deploy-notifications/properties/notifications/database/url
+  value: mysql://notifications:((notifications_db_password))@10.0.4.193:3306/notifications
+
+- type: replace
+  path: /instance_groups/name=push-apps-manager/jobs/name=push-apps-manager/properties/databases/app_usage_service/ip
+  value: *mysql_ip
+
+- type: replace
+  path: /instance_groups/name=mysql_monitor/jobs/name=replication-canary/properties/mysql-monitoring/replication-canary/cluster_ips
+  value: [*mysql_ip]
+
+- type: replace
+  path: /instance_groups/name=mysql_proxy/networks/name=private/static_ips
+  value: [10.0.4.199]
+
+- type: replace
+  path: /instance_groups/name=mysql_proxy/jobs/name=consul_agent/properties/consul/agent/servers/lan
+  value: *consul_ips
+
+- type: replace
+  path: /instance_groups/name=mysql_proxy/jobs/name=proxy/properties/cf_mysql/mysql/cluster_ips
+  value: [*mysql_ip]
+
+- type: replace
+  path: /instance_groups/name=mysql_proxy/jobs/name=proxy/properties/nats/machines
+  value: [*nats_ips]
