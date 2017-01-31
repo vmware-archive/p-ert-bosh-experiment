@@ -123,6 +123,12 @@ vm_extensions:
       size: 102400
       type: gp2
 
+- name: cf-internet-required
+  cloud_properties: {}
+
+- name: cf-internet-not-required
+  cloud_properties: {}
+
 - name: router-lb
   cloud_properties:
     elbs:
