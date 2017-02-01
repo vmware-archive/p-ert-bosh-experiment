@@ -186,4 +186,4 @@
 
 - type: replace
   path: /instance_groups/name=mysql_proxy/jobs/name=proxy/properties/nats/machines
-  value: [*nats_ips]
+  value: *nats_ips
