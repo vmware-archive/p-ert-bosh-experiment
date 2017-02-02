@@ -1,0 +1,63 @@
+- type: remove
+  path: '/instance_groups/name=blobstore'
+
+- type: replace
+  s3base: &s3base  # UNUSED.  this part is sneaky, but the same snippet is repeated almost verbatim 12 times in CF manifest
+    blobstore_type: 'fog'
+    fog_connection:
+      provider: AWS
+      aws_access_key_id: ((cc_s3_access_key))
+      aws_secret_access_key: ((cc_s3_secret_key))
+  path: '/instance_groups/name=api/jobs/name=cloud_controller_ng/properties/cc/buildpacks'
+  value: &s3buildpacks
+    <<: *s3base
+    buildpack_directory_key: ((cc_s3_bucket_name))
+
+- type: replace
+  path: '/instance_groups/name=api/jobs/name=cloud_controller_worker/properties/cc/buildpacks'
+  value: *s3buildpacks
+
+- type: replace
+  path: '/instance_groups/name=api/jobs/name=cloud_controller_ng/properties/cc/droplets'
+  value: &s3droplet
+    <<: *s3base
+    droplet_directory_key: ((cc_s3_bucket_name))
+- type: replace
+  path: '/instance_groups/name=api/jobs/name=cloud_controller_worker/properties/cc/droplets'
+  value: *s3droplet
+
+- type: replace
+  path: '/instance_groups/name=api/jobs/name=cloud_controller_ng/properties/cc/packages'
+  value: &s3packages
+    app_package_directory_key: ((cc_s3_bucket_name))
+    <<: *s3base
+- type: replace
+  path: '/instance_groups/name=api/jobs/name=cloud_controller_worker/properties/cc/packages'
+  value: *s3packages
+
+- type: replace
+  path: '/instance_groups/name=api/jobs/name=cloud_controller_ng/properties/cc/resource_pool'
+  value: &s3resourcepool
+    resource_directory_key: ((cc_s3_bucket_name))
+    <<: *s3base
+- type: replace
+  path: '/instance_groups/name=api/jobs/name=cloud_controller_worker/properties/cc/resource_pool'
+  value: *s3resourcepool
+
+
+
+- type: replace
+  path: '/instance_groups/name=cc_clock/jobs/name=cloud_controller_clock/properties/cc/buildpacks'
+  value: *s3buildpacks
+
+- type: replace
+  path: '/instance_groups/name=cc_clock/jobs/name=cloud_controller_clock/properties/cc/droplets'
+  value: *s3droplet
+
+- type: replace
+  path: '/instance_groups/name=cc_clock/jobs/name=cloud_controller_clock/properties/cc/packages'
+  value: *s3packages
+
+- type: replace
+  path: '/instance_groups/name=cc_clock/jobs/name=cloud_controller_clock/properties/cc/resource_pool'
+  value: *s3resourcepool
