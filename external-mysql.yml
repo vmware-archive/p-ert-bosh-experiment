@@ -42,7 +42,7 @@
       tag: cc
     address: ((external_mysql_host))
     db_scheme: mysql
-    port: ((external_mysql_posrt))
+    port: ((external_mysql_port))
     roles:
     - name: ((external_mysql_username))
       password: ((external_mysql_password))
