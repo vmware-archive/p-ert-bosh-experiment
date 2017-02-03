@@ -11,6 +11,7 @@
     lifecycle: errand
     vm_extensions:
     - cf-internet-required
+    - 5GB_ephemeral_disk
     jobs:
     - name: push-apps-manager
       release: push-apps-manager-release
