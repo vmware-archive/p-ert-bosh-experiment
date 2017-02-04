@@ -8,6 +8,38 @@
 - type: remove
   path: /instance_groups/name=mysql_proxy
 
+- type: remove
+  path: /instance_groups/name=mysql-bootstrap
+
+- type: remove
+  path: /instance_groups/name=mysql-rejoin-unsafe
+
+#remove all mysql releases
+
+- type: remove
+  path: /releases/name=cf-mysql
+
+- type: remove
+  path: /releases/name=mysql-monitoring
+
+#remove all mysql variables
+
+- type: remove
+  path: /variables/name=cf_mysql_mysql_admin_password
+- type: remove
+  path: /variables/name=cf_mysql_mysql_cluster_health_password
+- type: remove
+  path: /variables/name=cf_mysql_mysql_galera_healthcheck_endpoint_password
+- type: remove
+  path: /variables/name=cf_mysql_mysql_galera_healthcheck_password
+- type: remove
+  path: /variables/name=cf_mysql_mysql_roadmin_password
+- type: remove
+  path: /variables/name=cf_mysql_mysql_seeded_databases_cc_password
+- type: remove
+  path: /variables/name=cf_mysql_mysql_seeded_databases_diego_password
+- type: remove
+  path: /variables/name=cf_mysql_mysql_seeded_databases_uaa_password
 
 #replace database configuration
 - type: replace
