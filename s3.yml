@@ -1,5 +1,13 @@
 - type: remove
   path: '/instance_groups/name=blobstore'
+- type: remove
+  path: '/variables/name=blobstore_tls'
+- type: remove
+  path: '/variables/name=blobstore_ca'
+- type: remove
+  path: '/variables/name=blobstore_secure_link_secret'
+- type: remove
+  path: '/variables/name=blobstore_admin_users_password'
 
 - type: replace
   s3base: &s3base  # UNUSED.  this part is sneaky, but the same snippet is repeated almost verbatim 12 times in CF manifest
