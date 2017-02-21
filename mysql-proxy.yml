@@ -15,22 +15,8 @@
     jobs:
     - name: consul_agent
       release: consul
-      properties:
-        consul:
-          encrypt_keys:
-          - ((consul_encrypt_key))
-          ca_cert: "((consul_agent.ca))"
-          agent_cert: "((consul_agent.certificate))"
-          agent_key: "((consul_agent.private_key))"
-          server_cert: "((consul_server.certificate))"
-          server_key: "((consul_server.private_key))"
-          agent:
-            domain: cf.internal
-            servers:
-              lan: #TODO: linkify when cf-deployment does
-              - 10.0.1.194
-              - 10.0.1.195
-              - 10.0.1.196
+      consumes:
+        consul: {from: consul_server}
     - name: proxy
       release: cf-mysql
       properties:
