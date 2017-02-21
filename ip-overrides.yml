@@ -10,10 +10,6 @@
   - &mysql_ip 10.0.1.193
 
 - type: replace
-  path: /instance_groups/name=router/jobs/name=gorouter/properties/nats/machines
-  value: *nats_ips
-
-- type: replace
   path: /instance_groups/name=route-emitter/jobs/name=route_emitter/properties/diego/route_emitter/nats/machines
   value: *nats_ips
 
