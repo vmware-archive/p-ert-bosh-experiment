@@ -10,7 +10,7 @@
   - &mysql_ip 10.0.1.193
 
 - type: replace
-  path: /instance_groups/name=log_controller/jobs/name=route_registrar/properties/nats/machines
+  path: /instance_groups/name=log-api/jobs/name=route_registrar/properties/nats/machines
   value: *nats_ips
 
 - type: replace
